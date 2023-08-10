@@ -13,7 +13,7 @@ func SayHello(writer http.ResponseWriter, request *http.Request) {
 	if name == "" {
 		fmt.Fprintf(writer, "hello")
 	} else {
-		fmt.Fprint(writer, "hello %s ", name)
+		fmt.Fprintf(writer, "hello %s", name)
 	}
 }
 
