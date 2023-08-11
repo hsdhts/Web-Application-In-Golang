@@ -25,11 +25,12 @@ func TestResponseCode(t *testing.T) {
 
 	ResponseCode(recoder, request)
 
-	response := request.Response
+	response := recoder.Result()
 	body, _ := io.ReadAll(response.Body)
 
 	fmt.Println(response.StatusCode)
 	fmt.Println(response.Status)
 	fmt.Println(body)
+	fmt.Println(string(body))
 
 }
