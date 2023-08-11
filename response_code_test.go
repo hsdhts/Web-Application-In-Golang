@@ -11,5 +11,7 @@ func ResponseCode(writer http.ResponseWriter, request *http.Request) {
 	if name == "" {
 		writer.WriteHeader(400)
 		fmt.Fprint(writer, "name is empty")
+	} else {
+		fmt.Fprintf(writer, "Hello %s", name)
 	}
 }
