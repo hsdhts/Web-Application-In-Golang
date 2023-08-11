@@ -34,3 +34,19 @@ func TestResponseCode(t *testing.T) {
 	fmt.Println(string(body))
 
 }
+
+func TestResponseCodeValid(t *testing.T) {
+	request := httptest.NewRequest("GET", "http://localhost:8080/?name=Batman", nil)
+	recoder := httptest.NewRecorder()
+
+	ResponseCode(recoder, request)
+
+	response := recoder.Result()
+	body, _ := io.ReadAll(response.Body)
+
+	fmt.Println(response.StatusCode)
+	fmt.Println(response.Status)
+	fmt.Println(body)
+	fmt.Println(string(body))
+
+}
