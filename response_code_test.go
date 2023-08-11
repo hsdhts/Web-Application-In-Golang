@@ -12,7 +12,7 @@ func ResponseCode(writer http.ResponseWriter, request *http.Request) {
 	name := request.URL.Query().Get("name")
 
 	if name == "" {
-		writer.WriteHeader(400)
+		writer.WriteHeader(http.StatusBadRequest)
 		fmt.Fprint(writer, "name is empty")
 	} else {
 		fmt.Fprintf(writer, "Hello %s", name)
