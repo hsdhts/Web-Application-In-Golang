@@ -11,4 +11,14 @@ func TestFileServer(t *testing.T) {
 
 	mux := http.NewServeMux()
 	mux.Handle("/static/", fileServer)
+
+	server := http.Server{
+		Addr:    "localhost:8080",
+		Handler: mux,
+	}
+
+	err := server.ListenAndServe()
+	if err != nil {
+		panic(err)
+	}
 }
