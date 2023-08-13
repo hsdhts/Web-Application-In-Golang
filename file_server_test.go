@@ -10,7 +10,7 @@ func TestFileServer(t *testing.T) {
 	fileServer := http.FileServer(directory)
 
 	mux := http.NewServeMux()
-	mux.Handle("/static/", fileServer)
+	mux.Handle("/static/", http.StripPrefix("/static", fileServer))
 
 	server := http.Server{
 		Addr:    "localhost:8080",
