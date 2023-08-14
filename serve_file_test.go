@@ -2,6 +2,7 @@ package golang_web
 
 import (
 	_ "embed"
+	"fmt"
 	"net/http"
 	"testing"
 )
@@ -32,3 +33,12 @@ var resourcesOk string
 
 //go:embed resources/notfound.html
 var resourcesNotFound string
+
+func ServeFileEmbed(writer http.ResponseWriter, request *http.Request) {
+	if request.URL.Query().Get("name") != "" {
+		fmt.Fprint(writer, resourcesOk)
+	} else {
+		fmt.Fprint(writer, resourcesNotFound)
+	}
+
+}
