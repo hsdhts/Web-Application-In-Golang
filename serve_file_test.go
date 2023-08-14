@@ -1,6 +1,7 @@
 package golang_web
 
 import (
+	_ "embed"
 	"net/http"
 	"testing"
 )
@@ -25,3 +26,9 @@ func TestServeFile(t *testing.T) {
 		panic(err)
 	}
 }
+
+//go:embed resources/ok.html
+var resourcesOk string
+
+//go:embed resources/notfound.html
+var resourcesNotFound string
