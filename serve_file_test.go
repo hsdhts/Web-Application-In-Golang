@@ -42,3 +42,15 @@ func ServeFileEmbed(writer http.ResponseWriter, request *http.Request) {
 	}
 
 }
+
+func TestServeFileEmbed(t *testing.T) {
+	server := http.Server{
+		Addr:    "localhost:8080",
+		Handler: http.HandlerFunc(ServeFileEmbed),
+	}
+
+	err := server.ListenAndServe()
+	if err != nil {
+		panic(err)
+	}
+}
