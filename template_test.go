@@ -24,13 +24,24 @@ func TestSimpleHTML(t *testing.T) {
 	request := httptest.NewRequest(http.MethodGet, "http://localhost:8080", nil)
 	recorder := httptest.NewRecorder()
 
-	SimpleHTMLFile(recorder, request)
+	TemplateText(recorder, request)
 
 	body, _ := io.ReadAll(recorder.Result().Body)
 	fmt.Println(string(body))
 }
 
-func SimpleHTMLFile(writer http.ResponseWriter, request *http.Request) {
-	t := template.Must(template.ParseFiles("./templates/simple.gohtml"))
+func TemplateDirectory(writer http.ResponseWriter, request *http.Request) {
+	t := template.Must(template.ParseGlob("./templates/*.gohtml"))
 	t.ExecuteTemplate(writer, "simple.gohtml", "Hello HTML Template")
+}
+
+func TestTemplateDirectory(t *testing.T) {
+	request := httptest.NewRequest(http.MethodGet, "http://localhost:8080", nil)
+	recorder := httptest.NewRecorder()
+
+	TemplateDirectory(recorder, request)
+.
+
+	body, _ := io.ReadAll(recorder.Result().Body)
+	fmt.Println(string(body))
 }
