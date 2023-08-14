@@ -29,3 +29,8 @@ func TestSimpleHTML(t *testing.T) {
 	body, _ := io.ReadAll(recorder.Result().Body)
 	fmt.Println(string(body))
 }
+
+func SimpleHTMLFile(writer http.ResponseWriter, request *http.Request) {
+	t := template.Must(template.ParseFiles("./templates/simple.gohtml"))
+	t.ExecuteTemplate(writer, "simple.gohtml", "Hello HTML File")
+}
