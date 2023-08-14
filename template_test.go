@@ -40,7 +40,6 @@ func TestTemplateDirectory(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
 	TemplateDirectory(recorder, request)
-.
 
 	body, _ := io.ReadAll(recorder.Result().Body)
 	fmt.Println(string(body))
