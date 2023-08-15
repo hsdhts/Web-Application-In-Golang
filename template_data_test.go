@@ -13,7 +13,7 @@ func TemplateDataMap(writer http.ResponseWriter, request *http.Request) {
 	t := template.Must(template.ParseFiles("./templates/name.gohtml"))
 	t.ExecuteTemplate(writer, "name.gohtml", map[string]interface{}{
 		"Title": "Template Data Map",
-		"Name":  "Eko",
+		"Name":  "Batman",
 	})
 }
 
@@ -25,4 +25,17 @@ func TestTemplateDataMap(t *testing.T) {
 
 	body, _ := io.ReadAll(recorder.Result().Body)
 	fmt.Println(string(body))
+}
+
+type Page struct {
+	Title string
+	Name  string
+}
+
+func TemplateDataStruct(writer http.ResponseWriter, request *http.Request) {
+	t := template.Must(template.ParseFiles("./templates/name.gohtml"))
+	t.ExecuteTemplate(writer, "name.gohtml", Page{
+		Title: "Template data Struct",
+		Name:  "Batman",
+	})
 }
