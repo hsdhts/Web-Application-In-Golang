@@ -34,7 +34,7 @@ type Page struct {
 
 func TemplateActionIf(writer http.ResponseWriter, request *http.Request) {
 	t := template.Must(template.ParseFiles("./templates/if.gohtml"))
-	t.ExecuteTemplate(writer, "name.gohtml", Page{
+	t.ExecuteTemplate(writer, "if.gohtml", Page{
 		Title: "Template data Struct",
 		Name:  "Batman",
 	})
@@ -45,6 +45,24 @@ func TestTemplateActionIf(t *testing.T) {
 	recorder := httptest.NewRecorder()
 
 	TemplateActionIf(recorder, request)
+
+	body, _ := io.ReadAll(recorder.Result().Body)
+	fmt.Println(string(body))
+}
+
+func TemplateActionOperator(writer http.ResponseWriter, request *http.Request) {
+	t := template.Must(template.ParseFiles("./templates/comparator.gohtml"))
+	t.ExecuteTemplate(writer, "comparator.gohtml", map[string]interface{}{
+		"Title":      "Template Action",
+		"FinalValue": 90,
+	})
+}
+
+func TestTemplateActionOperator(t *testing.T) {
+	request := httptest.NewRequest(http.MethodGet, "http://localhost:8080", nil)
+	recorder := httptest.NewRecorder()
+
+	TemplateActionOperator(recorder, request)
 
 	body, _ := io.ReadAll(recorder.Result().Body)
 	fmt.Println(string(body))
