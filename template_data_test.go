@@ -39,3 +39,13 @@ func TemplateDataStruct(writer http.ResponseWriter, request *http.Request) {
 		Name:  "Batman",
 	})
 }
+
+func TestTemplateDataStruct(t *testing.T) {
+	request := httptest.NewRequest(http.MethodGet, "http://localhost:8080", nil)
+	recorder := httptest.NewRecorder()
+
+	TemplateDataStruct(recorder, request)
+
+	body, _ := io.ReadAll(recorder.Result().Body)
+	fmt.Println(string(body))
+}
