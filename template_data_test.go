@@ -32,19 +32,19 @@ type Page struct {
 	Name  string
 }
 
-func TemplateDataStruct(writer http.ResponseWriter, request *http.Request) {
-	t := template.Must(template.ParseFiles("./templates/name.gohtml"))
+func TemplateActionIf(writer http.ResponseWriter, request *http.Request) {
+	t := template.Must(template.ParseFiles("./templates/if.gohtml"))
 	t.ExecuteTemplate(writer, "name.gohtml", Page{
 		Title: "Template data Struct",
 		Name:  "Batman",
 	})
 }
 
-func TestTemplateDataStruct(t *testing.T) {
+func TestTemplateActionIf(t *testing.T) {
 	request := httptest.NewRequest(http.MethodGet, "http://localhost:8080", nil)
 	recorder := httptest.NewRecorder()
 
-	TemplateDataStruct(recorder, request)
+	TemplateActionIf(recorder, request)
 
 	body, _ := io.ReadAll(recorder.Result().Body)
 	fmt.Println(string(body))
